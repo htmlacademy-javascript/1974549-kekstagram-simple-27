@@ -2,24 +2,17 @@
 
 //Функция возвращающая случайное целое число из переданного диапазона включительно
 function getRandomInteger(min, max) {
-  const rand = min + Math.random() * (max + 1 - min);
-  if (min < 0) {
-    return NaN;
-  } else if (max <= min) {
+  const randomNamber = min + Math.random() * (max + 1 - min);
+  if (min < 0 || max <= min) {
     return NaN;
   }
-  return Math.floor(rand);
+  return Math.floor(randomNamber);
 }
 getRandomInteger(1, 20);
 
-//Функция для проверки максимальной длины строки
 
-function checkStringLengths(string, maxLength) {
-  const stringLength = string.length;
-  if (stringLength <= maxLength) {
-    return true;
-  }
-  return false;
-}
+const MAX_LENGTH = 140;
 
-checkStringLengths(1, 140);
+const checkStringLengths = (string) => (string.length <= MAX_LENGTH);
+
+checkStringLengths('string');
