@@ -23,8 +23,8 @@ const DESCRIPTION = [
 const DESCRIPTION_FOTOS = 25;
 
 const fotoDescription = (getId) => ({
-  id: getId,
-  url: `photos/${getRandomInteger(1,25)}.jpg`,
+  id: getId + 1,
+  url: `photos/${(getId + 1)}.jpg`,
   description: getRandomArrayElement(DESCRIPTION),
   likes: getRandomInteger(15, 200),
   comments: getRandomInteger(0, 200),
