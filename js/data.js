@@ -30,7 +30,7 @@ const fotoDescription = (getId) => ({
   comments: getRandomInteger(0, 200),
 });
 
-const similarDescriptionPhoto = Array.from({
+const similarDescriptionPhoto = () => Array.from({
   length: DESCRIPTION_FOTOS
 }, (a, b) => fotoDescription(b));
 
