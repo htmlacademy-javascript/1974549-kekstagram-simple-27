@@ -3,24 +3,10 @@ import {
   getRandomInteger
 } from './util.js';
 
-const DESCRIPTION = [
-  'Лето',
-  'Осень',
-  'Зима',
-  'Весна',
-  'Пора уезжать',
-  'Я остаюсь',
-  'Бывало и лучше',
-  'Раньше было лучше',
-  'Все хорошо',
-  'Закат',
-  'Я не люблю скайрим',
-  'Просто космос',
-  'Библейская история',
-  'Игорь существует',
-];
-
-const DESCRIPTION_FOTOS = 25;
+import {
+  DESCRIPTION,
+  DESCRIPTION_FOTOS
+} from './constants.js';
 
 const fotoDescription = (getId) => ({
   id: getId + 1,
