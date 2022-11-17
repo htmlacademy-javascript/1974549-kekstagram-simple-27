@@ -9,6 +9,6 @@ import {
 } from './miniatures.js';
 getUsersGallery(galleryPhotos);
 
-import './userModal.js';
+import './user-modal.js';
 
 
