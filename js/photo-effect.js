@@ -1,58 +1,69 @@
-import { PHOTO_EFFECTS_SETTINGS } from './constants.js';
+import{PHOTO_EFFECTS_SETTINGS} from './constants.js';
 
-const uploadedPhoto = document.querySelector('.img-upload__preview img');
-const effectsList = document.querySelector('.effects__list');
-const effectLevelValue = document.querySelector('.effect-level__value');
-const effectLevelSlider = document.querySelector('.effect-level__slider');
-const effectLevelSliderContainer = document.querySelector('.img-upload__effect-level');
+const form = document.querySelector('.img-upload__form');
+const levelSliderElement = document.querySelector('.effect-level__slider');
+const effectValueElement = document.querySelector('.effect-level__value');
+const imgUploadPreviewImg = document.querySelector('.img-upload__preview img');
 
-noUiSlider.create(effectLevelSlider, {
-  range: {
-    min: 0,
-    max: 1
-  },
-  start: 0,
-  step: 0.1,
-  connect: 'lower'
-});
+const DEFAULT_EFFECT = PHOTO_EFFECTS_SETTINGS[5];
+
+let chosenEffect = DEFAULT_EFFECT;
+const isDefault = () => chosenEffect === DEFAULT_EFFECT;
+
+const updateSlider = () => {
+  levelSliderElement.classList.remove('hidden');
+  levelSliderElement.noUiSlider.updateOptions({
+    range: {
+      min: chosenEffect.min,
+      max: chosenEffect.max,
+    },
+    step: chosenEffect.step,
+    start: chosenEffect.max,
+  });
+
+  if(isDefault()) {
+    levelSliderElement.classList.add('hidden');
+  }
+};
+
+const onFormChange = (evt) => {
+  if (!evt.target.classList.contains('effects__radio')) {
+    return;
+  }
+  chosenEffect = PHOTO_EFFECTS_SETTINGS.find((effect) => effect.name === evt.target.value);
+  updateSlider();
+};
+
+const onSliderUpdate = () => {
+  imgUploadPreviewImg.style.filter = 'none';
+  imgUploadPreviewImg.className = '';
+  effectValueElement.value = '';
+  if (isDefault()) {
+    return;
+  }
+  const sliderValue = levelSliderElement.noUiSlider.get();
+  imgUploadPreviewImg.style.filter = `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
+  imgUploadPreviewImg.classList.add(`effects__previw--${chosenEffect.name}`);
+  effectValueElement.value = levelSliderElement;
+};
 
 const resetPhotoEffects = () => {
-  uploadedPhoto.className = 'img-upload__preview';
-  uploadedPhoto.style.filter = '';
-  effectLevelSlider.setAttribute('disabled', true);
-  effectLevelSliderContainer.classList.add('hidden');
-  effectLevelValue.value = '';
+  chosenEffect = DEFAULT_EFFECT;
+  updateSlider();
 };
 
-const addPhotoEffects = ({effect, options}) => {
-  effectLevelSlider.removeAttribute('disabled');
-  effectLevelSliderContainer.classList.remove('hidden');
-  uploadedPhoto.className = 'img-upload__preview';
-  uploadedPhoto.classList.add(`effects__preview--${effect}`);
-  effectLevelSlider.noUiSlider.updateOptions(options);
-};
-
-const photoEffectHandler = (evt) => {
-  if (evt.target.value === 'none') {
-    resetPhotoEffects();
-  } else {
-    addPhotoEffects(PHOTO_EFFECTS_SETTINGS[evt.target.value]);
-  }
-};
-
-effectsList.addEventListener('change', photoEffectHandler);
-
-effectLevelSlider.noUiSlider.on('update', () => {
-  const effectLevelSliderValue = effectLevelSlider.noUiSlider.get();
-  effectLevelValue.value = effectLevelSliderValue;
-
-  const checkedPhotoEffectValue = document.querySelector('input[name="effect"]:checked');
-  if (checkedPhotoEffectValue && checkedPhotoEffectValue.value !== 'none') {
-    const {filter, unit} = PHOTO_EFFECTS_SETTINGS[checkedPhotoEffectValue.value];
-    uploadedPhoto.style.filter = `${filter}(${effectLevelSliderValue}${unit})`;
-  }
+noUiSlider.create(levelSliderElement, {
+  range: {
+    min: DEFAULT_EFFECT.min,
+    max: DEFAULT_EFFECT.max,
+  },
+  start: DEFAULT_EFFECT.max,
+  step: DEFAULT_EFFECT.step,
+  connect: 'lower',
 });
 
-export {
-  resetPhotoEffects
-};
+updateSlider();
+form.addEventListener('change', onFormChange);
+levelSliderElement.noUiSlider.on('update', onSliderUpdate);
+
+export { resetPhotoEffects };
