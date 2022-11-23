@@ -34,7 +34,6 @@ const getData = (onSuccess) => {
     });
 };
 
-
 const sendData = async (onSuccess, onFail, body) => {
   try {
     const response = await fetch(
