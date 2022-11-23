@@ -3,6 +3,7 @@ const MAX_LENGTH = 140;
 
 const SCALE_MIN_VALUE = 25;
 const SCALE_MAX_VALUE = 100;
+
 const SCALE_STEP = 25;
 const DEFAUL_VALUE = 100;
 
