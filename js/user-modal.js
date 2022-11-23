@@ -1,51 +1,71 @@
-import {
-  isEscapeKey
-} from './util.js';
-
-import {
-  onUploadFormSubmit
-} from './valid-form.js';
-import {
-  scaleReset
-} from './scale-button.js';
-import {
-  resetPhotoEffects
-} from './photo-effect.js';
+import {DEFAUL_VALUE} from './constants.js';
+import {scaleValue, previewPhoto, onRemoveScale, onAddScale} from './scale-button.js';
+import {elementDescription} from './valid-form.js';
+import {isEscapeKey, isEnterKey} from './util.js';
+import {onListChange, resetSliderImg} from './photo-effect.js';
 
 const body = document.querySelector('body');
-const uploadFile = body.querySelector('#upload-file');
-const imgUploadOverlay = body.querySelector('.img-upload__overlay');
-const userCloseModalWindow = body.querySelector('.img-upload__cancel');
 const uploadForm = document.querySelector('.img-upload__form');
+const imgUploadOverlay = document.querySelector('.img-upload__overlay');
+const imgUpload = document.querySelector('.img-upload__input');
+const userCloseModalWindow = imgUploadOverlay.querySelector('.img-upload__cancel');
 
-const onModalEscKeydown = (evt) => {
+const onUserModuleReset = () => {
+  imgUploadOverlay.classList.add('hidden');
+  body.classList.toggle('modal-open');
+  elementDescription.value = '';
+  scaleValue.value = `${DEFAUL_VALUE}%`;
+  previewPhoto.style = 'transform: scale(1)';
+  resetSliderImg();
+  onRemoveScale();
+  imgUpload.value = '';
+  imgUpload.innerHTML = '';
+};
+
+//Закрытие через ESC
+const onPopupEscKeydown = function (evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    closeUserModal();
+    onUserModuleReset();
   }
 };
 
-function openUserModal() {
+const openUserModule = () => {
   imgUploadOverlay.classList.remove('hidden');
   body.classList.toggle('modal-open');
-  onUploadFormSubmit();
-  scaleReset();
-  document.addEventListener('keydown', onModalEscKeydown);
+  document.addEventListener('keydown', onPopupEscKeydown);
+  onAddScale();
+  uploadForm.addEventListener('change', onListChange);
+  document.removeEventListener('change', onEnterKeydown);
+};
+
+function onEnterKeydown (evt){
+  if (isEnterKey(evt)) {
+    openUserModule();
+  }
 }
 
-uploadFile.addEventListener('change', () => {
-  openUserModal();
+imgUpload.addEventListener('change', () => {
+  openUserModule();
 });
 
+document.addEventListener('change', onEnterKeydown);
 
-function closeUserModal() {
-  imgUploadOverlay.classList.add('hidden');
-  body.classList.toggle('modal-open');
-  uploadForm.reset();
-  resetPhotoEffects();
-  document.removeEventListener('keydown', onModalEscKeydown);
-}
+const closeUserModule = () =>{
+  uploadForm.removeEventListener('change', onListChange);
+  document.removeEventListener('keydown', onPopupEscKeydown);
+  onUserModuleReset();
+};
 
 userCloseModalWindow.addEventListener('click', () => {
-  closeUserModal();
+  closeUserModule();
 });
+
+//Закрытие через Enter
+userCloseModalWindow.addEventListener('keydown', (evt) => {
+  if (isEnterKey(evt)) {
+    closeUserModule();
+  }
+});
+
+export{closeUserModule};

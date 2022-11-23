@@ -1,14 +1,13 @@
-import {
-  // eslint-disable-next-line no-unused-vars
-  similarDescriptionPhoto
-} from './data.js';
+import {closeUserModule} from './user-modal.js';
 
-import {
-  getUsersGallery,
-  galleryPhotos
-} from './miniatures.js';
-getUsersGallery(galleryPhotos);
+import {setUserModule} from './valid-form.js';
 
-import './user-modal.js';
-import'./scale-button.js';
-import'./photo-effect.js';
+import {miniaturePhotos} from './miniatures.js';
+
+import {getData} from './api.js';
+
+getData((pictures) => {
+  miniaturePhotos(pictures);
+});
+
+setUserModule(closeUserModule);

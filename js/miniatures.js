@@ -1,31 +1,18 @@
-import {
-  similarDescriptionPhoto
-} from './data.js';
-
-
-const similarListElement = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const galleryPhotos = similarDescriptionPhoto();
 
-const getUsersGallery = (galleryValues) => {
-  const pictureFragment = document.createDocumentFragment();
+const pictureListElement = document.querySelector('.pictures');
 
-  galleryValues.forEach(({
-    likes,
-    comments,
-    url
-  }) => {
-    const pictureElement = pictureTemplate.cloneNode(true);
-    pictureElement.querySelector('.picture__img').src = url;
-    pictureElement.querySelector('.picture__likes').textContent = likes;
-    pictureElement.querySelector('.picture__comments').textContent = comments;
-    similarListElement.append(pictureElement);
+const miniaturePhotos = (simularMiniature) => {
+  const fragment = document.createDocumentFragment();
+  simularMiniature.forEach(({likes, comments, url, description}) => {
+    const clonePictureTemplate = pictureTemplate.cloneNode(true);
+    clonePictureTemplate.querySelector('.picture__likes').textContent = likes;
+    clonePictureTemplate.querySelector('.picture__comments').textContent = comments;
+    clonePictureTemplate.querySelector('.picture__img').src = url;
+    clonePictureTemplate.querySelector('.picture__img').alt = description;
+    fragment.appendChild(clonePictureTemplate);
   });
-
-  similarListElement.append(pictureFragment);
+  pictureListElement.appendChild(fragment);
 };
 
-export {
-  getUsersGallery,
-  galleryPhotos
-};
+export {miniaturePhotos};
