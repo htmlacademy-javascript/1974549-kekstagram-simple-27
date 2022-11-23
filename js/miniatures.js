@@ -1,5 +1,4 @@
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-
 const pictureListElement = document.querySelector('.pictures');
 
 const miniaturePhotos = (simularMiniature) => {
