@@ -3,24 +3,10 @@ import {
   getRandomInteger
 } from './util.js';
 
-const DESCRIPTION = [
-  'Лето',
-  'Осень',
-  'Зима',
-  'Весна',
-  'Пора уезжать',
-  'Я остаюсь',
-  'Бывало и лучше',
-  'Раньше было лучше',
-  'Все хорошо',
-  'Закат',
-  'Я не люблю скайрим',
-  'Просто космос',
-  'Библейская история',
-  'Игорь существует',
-];
-
-const DESCRIPTION_FOTOS = 25;
+import {
+  DESCRIPTION,
+  DESCRIPTION_FOTOS
+} from './constants.js';
 
 const fotoDescription = (getId) => ({
   id: getId + 1,
@@ -30,7 +16,7 @@ const fotoDescription = (getId) => ({
   comments: getRandomInteger(0, 200),
 });
 
-const similarDescriptionPhoto = Array.from({
+const similarDescriptionPhoto = () => Array.from({
   length: DESCRIPTION_FOTOS
 }, (a, b) => fotoDescription(b));
 

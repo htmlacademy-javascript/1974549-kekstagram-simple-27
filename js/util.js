@@ -1,3 +1,8 @@
+import {
+  MAX_LENGTH
+} from './constants.js';
+
+
 //(https://learn.javascript.ru/task/random-int-min-max)
 
 //Функция возвращающая случайное целое число из переданного диапазона включительно
@@ -13,15 +18,15 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
 
 // Функция для проверки максимальной длины строки.
 
-const MAX_LENGTH = 140;
-
 const checkStringLengths = (string) => (string.length <= MAX_LENGTH);
 
 checkStringLengths('string');
+
+const isEscapeKey = (evt) => evt.key === 'Escape';
 
 export {
   getRandomInteger,
   checkStringLengths,
   getRandomArrayElement,
-  MAX_LENGTH
+  isEscapeKey
 };
