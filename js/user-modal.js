@@ -30,6 +30,7 @@ const onPopupEscKeydown = function (evt) {
   }
 };
 
+// Открытие модального окна
 const openUserModule = () => {
   imgUploadOverlay.classList.remove('hidden');
   body.classList.toggle('modal-open');
@@ -51,6 +52,7 @@ imgUpload.addEventListener('change', () => {
 
 document.addEventListener('change', onEnterKeydown);
 
+// Закрытие модального окна
 const closeUserModule = () =>{
   uploadForm.removeEventListener('change', onListChange);
   document.removeEventListener('keydown', onPopupEscKeydown);
