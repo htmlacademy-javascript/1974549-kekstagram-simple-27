@@ -5,6 +5,12 @@ import {
 import {
   onUploadFormSubmit
 } from './valid-form.js';
+import {
+  scaleReset
+} from './scale-button.js';
+import {
+  resetPhotoEffects
+} from './photo-effect.js';
 
 const body = document.querySelector('body');
 const uploadFile = body.querySelector('#upload-file');
@@ -23,7 +29,7 @@ function openUserModal() {
   imgUploadOverlay.classList.remove('hidden');
   body.classList.toggle('modal-open');
   onUploadFormSubmit();
-
+  scaleReset();
   document.addEventListener('keydown', onModalEscKeydown);
 }
 
@@ -36,7 +42,7 @@ function closeUserModal() {
   imgUploadOverlay.classList.add('hidden');
   body.classList.toggle('modal-open');
   uploadForm.reset();
-
+  resetPhotoEffects();
   document.removeEventListener('keydown', onModalEscKeydown);
 }
 

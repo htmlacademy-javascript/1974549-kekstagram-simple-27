@@ -10,5 +10,5 @@ import {
 getUsersGallery(galleryPhotos);
 
 import './user-modal.js';
-
-
+import'./scale-button.js';
+import'./photo-effect.js';
