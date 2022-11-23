@@ -1,44 +1,40 @@
-import {
+import {SCALE_MIN_VALUE,
   SCALE_MAX_VALUE,
-  SCALE_MIN_VALUE,
   SCALE_STEP,
-  DEFAUL_VALUE
-} from './constants.js';
+  DEFAUL_VALUE} from './constants.js';
 
 const scaleSmaller = document.querySelector('.scale__control--smaller');
 const scaleBigger = document.querySelector('.scale__control--bigger');
 const scaleValue = document.querySelector('.scale__control--value');
-const previewPhoto = document.querySelector('.img-upload__preview img');
+const previewPhoto = document.querySelector('.img-upload__preview').querySelector('img');
 
-let defaultScale = 100;
+const onDownScale = () => {
+  let scaleControlValue = parseInt(scaleValue.value, 10);
+  if(scaleControlValue > SCALE_MIN_VALUE){
+    scaleControlValue -= SCALE_STEP;
+    scaleValue.value = `${scaleControlValue}%`;
+    previewPhoto.style.transform = `scale(${scaleControlValue / DEFAUL_VALUE})`;
+  }
+};
 
+const onUpScale = () => {
+  let scaleControlValue = parseInt(scaleValue.value, 10);
+  if(scaleControlValue < SCALE_MAX_VALUE){
+    scaleControlValue += SCALE_STEP;
+    scaleValue.value = `${scaleControlValue}%`;
+    previewPhoto.style.transform = `scale(${scaleControlValue / DEFAUL_VALUE})`;
+  }
+};
 
-const scaleImage = () => {
-  previewPhoto.style.transform = `scale(${DEFAUL_VALUE / 100})`;
+const onAddScale = () => {
   scaleValue.value = `${DEFAUL_VALUE}%`;
-  defaultScale = 100;
-};
-const scaleReset = () => {
-  scaleImage ();
+  scaleSmaller.addEventListener('click', onDownScale);
+  scaleBigger.addEventListener('click', onUpScale);
 };
 
-const onButtonDownScale = () => {
-  if(defaultScale > SCALE_MIN_VALUE){
-    defaultScale -= SCALE_STEP;
-    scaleValue.value = `${defaultScale}%`;
-    previewPhoto.style.transform = `scale(${defaultScale / 100})`;
-  }
+const onRemoveScale = () => {
+  scaleSmaller.removeEventListener('click', onDownScale);
+  scaleBigger.removeEventListener('click', onUpScale);
 };
 
-const onUpButtonScale = () => {
-  if(defaultScale < SCALE_MAX_VALUE){
-    defaultScale += SCALE_STEP;
-    scaleValue.value = `${defaultScale}%`;
-    previewPhoto.style.transform = `scale(${defaultScale / 100})`;
-  }
-};
-
-scaleSmaller.addEventListener('click', onButtonDownScale);
-scaleBigger.addEventListener('click', onUpButtonScale);
-
-export{scaleReset};
+export{scaleValue, previewPhoto, onRemoveScale, onAddScale, DEFAUL_VALUE};
