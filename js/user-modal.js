@@ -1,25 +1,25 @@
 import {DEFAUL_VALUE} from './constants.js';
-import {scaleValue, previewPhoto, onRemoveScale, onAddScale} from './scale-button.js';
-import {elementDescription} from './valid-form.js';
+import {scaleValueElement, previewPhotoElement, onRemoveScale, onAddScale} from './scale-button.js';
+import {descriptionElement} from './valid-form.js';
 import {isEscapeKey, isEnterKey} from './util.js';
 import {onListChange, resetSliderImg} from './photo-effect.js';
 
-const body = document.querySelector('body');
-const uploadForm = document.querySelector('.img-upload__form');
-const imgUploadOverlay = document.querySelector('.img-upload__overlay');
-const imgUpload = document.querySelector('.img-upload__input');
-const userCloseModalWindow = imgUploadOverlay.querySelector('.img-upload__cancel');
+const bodyElement = document.querySelector('body');
+const uploadFormElement = document.querySelector('.img-upload__form');
+const imgOverlayElement = document.querySelector('.img-upload__overlay');
+const imgInputElement = document.querySelector('.img-upload__input');
+const userCloseModalElement = imgOverlayElement.querySelector('.img-upload__cancel');
 
 const onUserModuleReset = () => {
-  imgUploadOverlay.classList.add('hidden');
-  body.classList.toggle('modal-open');
-  elementDescription.value = '';
-  scaleValue.value = `${DEFAUL_VALUE}%`;
-  previewPhoto.style = 'transform: scale(1)';
+  imgOverlayElement.classList.add('hidden');
+  bodyElement.classList.toggle('modal-open');
+  descriptionElement.value = '';
+  scaleValueElement.value = `${DEFAUL_VALUE}%`;
+  previewPhotoElement.style = 'transform: scale(1)';
   resetSliderImg();
   onRemoveScale();
-  imgUpload.value = '';
-  imgUpload.innerHTML = '';
+  imgInputElement.value = '';
+  imgInputElement.innerHTML = '';
 };
 
 //Закрытие через ESC
@@ -30,12 +30,13 @@ const onPopupEscKeydown = function (evt) {
   }
 };
 
+// Открытие модального окна
 const openUserModule = () => {
-  imgUploadOverlay.classList.remove('hidden');
-  body.classList.toggle('modal-open');
+  imgOverlayElement.classList.remove('hidden');
+  bodyElement.classList.toggle('modal-open');
   document.addEventListener('keydown', onPopupEscKeydown);
   onAddScale();
-  uploadForm.addEventListener('change', onListChange);
+  uploadFormElement.addEventListener('change', onListChange);
   document.removeEventListener('change', onEnterKeydown);
 };
 
@@ -45,24 +46,25 @@ function onEnterKeydown (evt){
   }
 }
 
-imgUpload.addEventListener('change', () => {
+imgInputElement.addEventListener('change', () => {
   openUserModule();
 });
 
 document.addEventListener('change', onEnterKeydown);
 
+// Закрытие модального окна
 const closeUserModule = () =>{
-  uploadForm.removeEventListener('change', onListChange);
+  uploadFormElement.removeEventListener('change', onListChange);
   document.removeEventListener('keydown', onPopupEscKeydown);
   onUserModuleReset();
 };
 
-userCloseModalWindow.addEventListener('click', () => {
+userCloseModalElement.addEventListener('click', () => {
   closeUserModule();
 });
 
 //Закрытие через Enter
-userCloseModalWindow.addEventListener('keydown', (evt) => {
+userCloseModalElement.addEventListener('keydown', (evt) => {
   if (isEnterKey(evt)) {
     closeUserModule();
   }
