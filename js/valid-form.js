@@ -10,6 +10,7 @@ import {
 } from './util.js';
 
 const bodyElement = document.querySelector('body');
+
 const userFormElement = document.querySelector('.img-upload__form');
 const submitButtonElement = userFormElement.querySelector('.img-upload__submit');
 const descriptionElement = userFormElement.querySelector('.text__description');
@@ -96,7 +97,6 @@ function hiddenReport() {
 
 const setUserModule = (onSuccess) => {
   userFormElement.addEventListener('submit', onSubmitButton);
-
   function onSubmitButton(evt) {
     evt.preventDefault();
     const isValid = pristine.validate();

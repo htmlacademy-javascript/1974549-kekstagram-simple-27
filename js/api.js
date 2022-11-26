@@ -24,6 +24,7 @@ const showAlert = (message) => {
 const getData = (onSuccess) => {
   fetch(
     GET_PICTURES_DATA_URL,
+
   )
     .then((response) => response.json())
     .then((pictures) => {

@@ -44,7 +44,7 @@ function onEnterKeydown (evt){
   if (isEnterKey(evt)) {
     openUserModule();
   }
-}
+};
 
 imgInputElement.addEventListener('change', () => {
   openUserModule();

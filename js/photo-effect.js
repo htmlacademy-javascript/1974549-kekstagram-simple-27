@@ -19,7 +19,7 @@ const getSlider = () => {
     step: changeEffects.step,
     start: changeEffects.max,
   });
-
+  
   if(isDefault()) {
     sliderElement.classList.add('hidden');
   }
@@ -67,6 +67,5 @@ noUiSlider.create(sliderElement, {
 getSlider();
 
 sliderElement.noUiSlider.on('update', onSliderUpdate);
-
 
 export{onListChange, resetSliderImg};

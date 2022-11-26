@@ -9,4 +9,5 @@ import {getData} from './api.js';
 getData((pictures) => {
   createMiniaturePhotos(pictures);
 });
+
 setUserModule(closeUserModule);
