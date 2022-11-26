@@ -1,7 +1,7 @@
 import {ALERT_SHOW_TIME} from './constants.js';
 
-const SAVE_PICTURES_DATA_URL = 'https://27.javascript.pages.academy/kekstagram-simple';
 const GET_PICTURES_DATA_URL = 'https://27.javascript.pages.academy/kekstagram-simple/data';
+const SAVE_PICTURES_DATA_URL = 'https://27.javascript.pages.academy/kekstagram-simple';
 
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
