@@ -55,7 +55,7 @@ const PHOTO_EFFECTS_SETTINGS = [
     max: 3,
     step: 0.1,
     unit: '',
-   }
+  }
 ];
 
 export {
