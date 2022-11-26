@@ -1,7 +1,7 @@
 import {ALERT_SHOW_TIME} from './constants.js';
 
-const SAVE_PICTURES_DATA = 'https://27.javascript.pages.academy/kekstagram-simple';
-const GET_DATA_PICTURES = 'https://27.javascript.pages.academy/kekstagram-simple/data';
+const SAVE_PICTURES_DATA_URL = 'https://27.javascript.pages.academy/kekstagram-simple';
+const GET_PICTURES_DATA_URL = 'https://27.javascript.pages.academy/kekstagram-simple/data';
 
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
@@ -23,7 +23,7 @@ const showAlert = (message) => {
 
 const getData = (onSuccess) => {
   fetch(
-    GET_DATA_PICTURES,
+    GET_PICTURES_DATA_URL,
   )
     .then((response) => response.json())
     .then((pictures) => {
@@ -38,7 +38,7 @@ const getData = (onSuccess) => {
 const sendData = async (onSuccess, onFail, body) => {
   try {
     const response = await fetch(
-      SAVE_PICTURES_DATA,
+      SAVE_PICTURES_DATA_URL,
       {
         method: 'POST',
         body,

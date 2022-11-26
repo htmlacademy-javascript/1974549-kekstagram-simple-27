@@ -11,6 +11,12 @@ const ALERT_SHOW_TIME = 5000;
 
 const PHOTO_EFFECTS_SETTINGS = [
   {
+    name: 'none',
+    min: 0,
+    max: 100,
+    step: 1,
+  },
+  {
     name: 'chrome',
     style: 'grayscale',
     min: 0,
@@ -49,13 +55,7 @@ const PHOTO_EFFECTS_SETTINGS = [
     max: 3,
     step: 0.1,
     unit: '',
-  },
-  {
-    name: 'none',
-    min: 0,
-    max: 100,
-    step: 1,
-  },
+  }
 ];
 
 export {

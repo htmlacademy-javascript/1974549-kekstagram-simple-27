@@ -3,38 +3,38 @@ import {SCALE_MIN_VALUE,
   SCALE_STEP,
   DEFAUL_VALUE} from './constants.js';
 
-const scaleSmaller = document.querySelector('.scale__control--smaller');
-const scaleBigger = document.querySelector('.scale__control--bigger');
-const scaleValue = document.querySelector('.scale__control--value');
-const previewPhoto = document.querySelector('.img-upload__preview').querySelector('img');
+const scaleSmallerElement = document.querySelector('.scale__control--smaller');
+const scaleBiggerElement = document.querySelector('.scale__control--bigger');
+const scaleValueElement = document.querySelector('.scale__control--value');
+const previewPhotoElement = document.querySelector('.img-upload__preview').querySelector('img');
 
 const onDownScale = () => {
-  let scaleControlValue = parseInt(scaleValue.value, 10);
+  let scaleControlValue = parseInt(scaleValueElement.value, 10);
   if(scaleControlValue > SCALE_MIN_VALUE){
     scaleControlValue -= SCALE_STEP;
-    scaleValue.value = `${scaleControlValue}%`;
-    previewPhoto.style.transform = `scale(${scaleControlValue / DEFAUL_VALUE})`;
+    scaleValueElement.value = `${scaleControlValue}%`;
+    previewPhotoElement.style.transform = `scale(${scaleControlValue / DEFAUL_VALUE})`;
   }
 };
 
 const onUpScale = () => {
-  let scaleControlValue = parseInt(scaleValue.value, 10);
+  let scaleControlValue = parseInt(scaleValueElement.value, 10);
   if(scaleControlValue < SCALE_MAX_VALUE){
     scaleControlValue += SCALE_STEP;
-    scaleValue.value = `${scaleControlValue}%`;
-    previewPhoto.style.transform = `scale(${scaleControlValue / DEFAUL_VALUE})`;
+    scaleValueElement.value = `${scaleControlValue}%`;
+    previewPhotoElement.style.transform = `scale(${scaleControlValue / DEFAUL_VALUE})`;
   }
 };
 
 const onAddScale = () => {
-  scaleValue.value = `${DEFAUL_VALUE}%`;
-  scaleSmaller.addEventListener('click', onDownScale);
-  scaleBigger.addEventListener('click', onUpScale);
+  scaleValueElement.value = `${DEFAUL_VALUE}%`;
+  scaleSmallerElement.addEventListener('click', onDownScale);
+  scaleBiggerElement.addEventListener('click', onUpScale);
 };
 
 const onRemoveScale = () => {
-  scaleSmaller.removeEventListener('click', onDownScale);
-  scaleBigger.removeEventListener('click', onUpScale);
+  scaleSmallerElement.removeEventListener('click', onDownScale);
+  scaleBiggerElement.removeEventListener('click', onUpScale);
 };
 
-export{scaleValue, previewPhoto, onRemoveScale, onAddScale, DEFAUL_VALUE};
+export{scaleValueElement, previewPhotoElement, onRemoveScale, onAddScale, DEFAUL_VALUE};
